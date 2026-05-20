@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="https://jakarta.ee/xml/ns/persistence"
+    version="3.0">
+
+    <persistence-unit name="parcial-garzon" transaction-type="RESOURCE_LOCAL">
+
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+
+        <class>edu.backend.parcial.models.Tarjetas</class>
+        <class>edu.backend.parcial.models.Cotizaciones</class>
+
+        <properties>
+
+            <!-- JDBC -->
+            <property name="jakarta.persistence.jdbc.driver" value="org.h2.Driver" />
+            <property name="jakarta.persistence.jdbc.url" value="jdbc:h2:mem:parcial-garzon;DB_CLOSE_DELAY=-1" />
+            <property name="jakarta.persistence.jdbc.user" value="sa" />
+            <property name="jakarta.persistence.jdbc.password" value="" />
+
+            <!-- Crear schema desde SQL -->
+            <property name="jakarta.persistence.schema-generation.database.action" value="drop-and-create" />
+            <property name="jakarta.persistence.schema-generation.create-source" value="script" />
+            <property name="jakarta.persistence.schema-generation.create-script-source" value="schema.sql" />
+
+            <!-- Cargar datos -->
+            <property name="jakarta.persistence.sql-load-script-source" value="data.sql" />
+
+            <!-- Hibernate -->
+            <property name="hibernate.dialect" value="org.hibernate.dialect.H2Dialect" />
+
+            <!-- Logs -->
+            <property name="hibernate.show_sql" value="true" />
+
+            <property name="hibernate.format_sql" value="true" />
+
+        </properties>
+
+    </persistence-unit>
+
+</persistence>
