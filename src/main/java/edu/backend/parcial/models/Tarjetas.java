@@ -32,4 +32,16 @@ public class Tarjetas {
     @Column(name = "LIMITE_CREDITO", nullable = false)
     private Double limiteCredito;
 
+    public Tarjetas(String numero, String titular, Double limiteCredito) {
+        this.numero = numero;
+        this.titular = titular;
+        this.limiteCredito = limiteCredito;
+    }
+
+
+    // Para guardar en el CSV
+    public String toCsv() {
+        return this.id + "," + this.numero + "," + this.titular + "," + this.limiteCredito;
+    }
+
 }

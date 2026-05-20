@@ -1,7 +1,13 @@
 package edu.backend.parcial;
 
 import java.util.List;
-
+import java.io.BufferedReader;
+import java.io.FileWriter;
+import java.io.IOException;
+import java.io.PrintWriter;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
+import java.nio.file.Path;
 import java.sql.SQLException;
 
 import edu.backend.parcial.models.Consumos;
@@ -20,47 +26,73 @@ public class App {
 
     public static void main(String[] args) throws SQLException {       
 
+        
         // Inicia en el navegador web el motor H2
         Server.createWebServer("-web", "-webAllowOthers", "-webPort", "8082").start();
-
+        
         TarjetasServicesImpl tarjetasServices = new TarjetasServicesImpl();
 
+
+        System.out.println("DATOS DE LA TARJETA DESDE EL CSV PARA LA BASE DE DATOS");
+
+        String ruta = System.getProperty("user.dir");
+
+        Path archivo = Path.of(ruta + "/src/main/resources/files/tarjetas.csv");
+
+        int contador = 0;
+        String linea = "";
+
+        try (BufferedReader br = Files.newBufferedReader(archivo, StandardCharsets.UTF_8)) {            
+                        
+            while ((linea = br.readLine()) != null) {
+
+                if(contador != 0) {
+                    String[] columna = linea.split(",");
+
+                    if(columna.length == 4) {
+                        //tarjeta.setId(Long.parseLong(columna[0]));
+
+                        Tarjetas tarjeta = new Tarjetas(columna[1],columna[2],Double.parseDouble(columna[3]));
+                        
+                        tarjetasServices.add(tarjeta);
+                    }                     
+                }               
+
+                contador++;
+            }
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+
+        
         List<Tarjetas> tarjetas = tarjetasServices.getAll();
 
-        System.out.println("DATOS DE LA TARJETA");
+        System.out.println("\n\nMOSTRAMOS LOS DATOS DE LA TARJETA DESDE LA BASE DE DATOS");
 
-        for (Tarjetas tarjeta : tarjetas) {
-            System.out.println(tarjeta);
-        }
+        for (Tarjetas tar : tarjetas) {
+            System.out.println(tar);
+        }   
+        
+        guardarTarjetas(ruta, tarjetas);
 
-        CotizacionesServiceImpl cotizacionesService = new CotizacionesServiceImpl();
 
-        System.out.println("DATOS DE LA COTIZACIONES");
+    }
 
-        List<Cotizaciones> cotizaciones = cotizacionesService.getAll();
+    private static void guardarTarjetas(String ruta, List<Tarjetas> tarjetta) {
+        try (FileWriter fw = new FileWriter(ruta + "/src/main/resources/files/tarjetasnuevo.csv");
 
-        for (Cotizaciones cotizacion : cotizaciones) {
-            System.out.println(cotizacion);
-        }
+            PrintWriter pw = new PrintWriter(fw)) {
+            
+            pw.println("ID,NUMERO,TITULAR,LIMITE_CREDITO");
 
-        ConsumosServiceImpl consumosService = new ConsumosServiceImpl();
+            for (Tarjetas tarje : tarjetta) {            
+                pw.println(tarje.toCsv());
+            }
 
-        System.out.println("DATOS DE LA CONSUMOS");
-
-        List<Consumos> consumos = consumosService.getAll();
-
-        for (Consumos consumo : consumos) {
-            System.out.println(consumo);
-        }
-
-        LiquidacionesServiceImpl liquidacionesService = new LiquidacionesServiceImpl();
-
-        System.out.println("DATOS DE LA LIQUIDACIONES");
-
-        List<Liquidaciones> liquidaciones = liquidacionesService.getAll();
-
-        for (Liquidaciones liquidacion : liquidaciones) {
-            System.out.println(liquidacion);
-        }
+        } catch (IOException e) {
+            e.printStackTrace();
+        }             
     }
 }
