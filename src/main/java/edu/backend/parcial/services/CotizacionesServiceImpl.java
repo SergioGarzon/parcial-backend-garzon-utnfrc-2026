@@ -1,16 +1,15 @@
 package edu.backend.parcial.services;
 
 import edu.backend.parcial.models.Cotizaciones;
-import edu.backend.parcial.models.Tarjetas;
 import edu.backend.parcial.repositories.CotizacionesRepository;
 
 import java.util.List;
 
-public class CotizacionesServiceImpl implements IService<Cotizaciones, String> {
+public class CotizacionesServiceImpl2 implements IService<Cotizaciones, String> {
     
     private CotizacionesRepository cotizacionesRepository;
 
-    public CotizacionesServiceImpl() {
+    public CotizacionesServiceImpl2() {
         cotizacionesRepository = new CotizacionesRepository();
     }
 
