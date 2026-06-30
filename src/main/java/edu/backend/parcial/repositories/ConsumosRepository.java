@@ -6,6 +6,7 @@ import jakarta.persistence.EntityManager;
 import java.util.List;
 
 public class ConsumosRepository extends Repository<Consumos, Long> {
+
     @Override
     public Consumos getById(Long id) {
 

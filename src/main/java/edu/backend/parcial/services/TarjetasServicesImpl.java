@@ -5,7 +5,7 @@ import java.util.List;
 import edu.backend.parcial.models.Tarjetas;
 import edu.backend.parcial.repositories.TarjetasRepository;
 
-public class TarjetasServicesImpl implements IService<Tarjetas, Long> {
+public class TarjetasServicesImpl implements ITarjetaService<Tarjetas, Long> {
 
     private TarjetasRepository tarjetasRepository;
 

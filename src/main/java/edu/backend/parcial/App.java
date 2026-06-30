@@ -10,12 +10,9 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.sql.SQLException;
 
-import edu.backend.parcial.models.Consumos;
-import edu.backend.parcial.models.Cotizaciones;
+import edu.backend.parcial.dto.LiquidacionDTO;
 import edu.backend.parcial.models.Liquidaciones;
 import edu.backend.parcial.models.Tarjetas;
-import edu.backend.parcial.services.ConsumosServiceImpl;
-import edu.backend.parcial.services.CotizacionesServiceImpl;
 import edu.backend.parcial.services.LiquidacionesServiceImpl;
 import edu.backend.parcial.services.TarjetasServicesImpl;
 
@@ -32,7 +29,9 @@ public class App {
         
         TarjetasServicesImpl tarjetasServices = new TarjetasServicesImpl();
 
+        LiquidacionesServiceImpl liquidacionesService = new LiquidacionesServiceImpl();
 
+        /*
         System.out.println("DATOS DE LA TARJETA DESDE EL CSV PARA LA BASE DE DATOS");
 
         String ruta = System.getProperty("user.dir");
@@ -78,8 +77,19 @@ public class App {
         guardarTarjetas(ruta, tarjetas);
 
 
+         */
+
+        List<Liquidaciones> l = liquidacionesService.getAll();
+
+        for (Liquidaciones li: l) {
+            System.out.println(li.toString());
+        }
+
+        System.out.println(liquidacionesService.obtenerYMostrar());
+
     }
 
+    /*
     private static void guardarTarjetas(String ruta, List<Tarjetas> tarjetta) {
         try (FileWriter fw = new FileWriter(ruta + "/src/main/resources/files/tarjetasnuevo.csv");
 
@@ -94,5 +104,5 @@ public class App {
         } catch (IOException e) {
             e.printStackTrace();
         }             
-    }
+    }*/
 }

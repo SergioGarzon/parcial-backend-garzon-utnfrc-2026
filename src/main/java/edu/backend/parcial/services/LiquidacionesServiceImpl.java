@@ -6,7 +6,7 @@ import edu.backend.parcial.repositories.LiquidacionesRepository;
 
 import java.util.List;
 
-public class LiquidacionesServiceImpl implements IService<Liquidaciones, Long> {
+public class LiquidacionesServiceImpl implements ILiquidacionesService {
     
     private LiquidacionesRepository liquidacionesRepository;
 
@@ -39,4 +39,9 @@ public class LiquidacionesServiceImpl implements IService<Liquidaciones, Long> {
         return liquidacionesRepository.delete(id);
     }
 
+    @Override
+    public String obtenerYMostrar() {
+        Liquidaciones liq = liquidacionesRepository.getLiquidacion("999999", 2026, 5);
+        return liq.toString();
+    }
 }

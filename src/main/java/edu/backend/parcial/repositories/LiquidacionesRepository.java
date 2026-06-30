@@ -33,20 +33,23 @@ public class LiquidacionesRepository extends Repository<Liquidaciones, Long> {
 
     public Liquidaciones getLiquidacion(String numeroTarjeta, Integer anio, Integer mes) {
 
+        /*Aqui esta el problema por el cual no me traia bien la informacion*/
         EntityManager manager = getManager();
 
         try {
 
-            return manager.createQuery("""
-                    FROM Liquidaciones l
-                    WHERE l.tarjeta.numero = :numero
-                    AND l.anio = :anio
-                    AND l.mes = :mes
-                    """, Liquidaciones.class)
-                    .setParameter("numero", numeroTarjeta)
-                    .setParameter("anio", anio)
-                    .setParameter("mes", mes)
+            Liquidaciones liquidaciones = new Liquidaciones();
+
+            liquidaciones = manager.createQuery("""
+                    FROM Liquidaciones""", Liquidaciones.class)
+
+                    //  l.tarjeta.numero = :numero AND
+                    //.setParameter("numero", numeroTarjeta)
+                    //.setParameter("anio", anio)
+                    //.setParameter("mes", mes)
                     .getSingleResult();
+
+            return liquidaciones;
 
         } finally {
             manager.close();

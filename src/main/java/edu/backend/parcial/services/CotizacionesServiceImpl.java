@@ -5,11 +5,11 @@ import edu.backend.parcial.repositories.CotizacionesRepository;
 
 import java.util.List;
 
-public class CotizacionesServiceImpl2 implements IService<Cotizaciones, String> {
+public class CotizacionesServiceImpl implements ICotizacionesService {
     
     private CotizacionesRepository cotizacionesRepository;
 
-    public CotizacionesServiceImpl2() {
+    public CotizacionesServiceImpl() {
         cotizacionesRepository = new CotizacionesRepository();
     }
 

@@ -6,7 +6,7 @@ import edu.backend.parcial.repositories.ConsumosRepository;
 
 import java.util.List;
 
-public class ConsumosServiceImpl implements IService<Consumos, Long> {
+public class ConsumosServiceImpl implements IConsumoService {
  
     
     private ConsumosRepository consumosRepository;
