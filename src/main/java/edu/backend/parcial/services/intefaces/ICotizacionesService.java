@@ -1,11 +1,8 @@
 package edu.backend.parcial.services;
 
-import edu.backend.parcial.models.Cotizaciones;
-
-import java.util.List;
-
 public interface ICotizacionesService {
 
+    /*
     List<Cotizaciones> getAll();
 
     Cotizaciones getById(String id);
@@ -15,5 +12,7 @@ public interface ICotizacionesService {
     void update(Cotizaciones entity);
 
     Cotizaciones delete(String id);
+
+     */
 
 }
