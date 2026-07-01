@@ -27,32 +27,7 @@ public class LiquidacionesServiceImplement implements LiquidacionService {
 
     public LiquidacionDTO generarLiquidacion(long idTarjeta, int anio, int mes) throws TarjetaInexistenteException {
 
-/*
-
-
-
-            private Long id;
-            private Tarjetas tarjeta;
-            private Integer mes;
-            private Integer anio;
-            private Double totalAPagar;
-            private Double totalConsumos;
-            private Double totalImpuestos;
-            private Double totalDescuentos;
-
-
         Liquidacion liquidaciones = this.liquidacionRepository.getLiquidacion(String.valueOf(idTarjeta), anio, mes);
-
-
-            Long id;
-            String numeroTarjeta;
-            String titular;
-            int mes;
-            int anio;
-            double totalAPagar;
-            double totalConsumos;
-            double totalImpuestos;
-            double totalDescuentos;
 
         LiquidacionDTO liquidacionDTO = new LiquidacionDTO();
         liquidacionDTO.setId(liquidaciones.getId());
@@ -66,10 +41,6 @@ public class LiquidacionesServiceImplement implements LiquidacionService {
         liquidacionDTO.setTotalDescuentos(liquidaciones.getTotalDescuentos());
 
         return liquidacionDTO;
-
-        */
-
-        return null;
     }
 
     public List<String> getLiquidacionesPendientes(int anio, int mes) {
