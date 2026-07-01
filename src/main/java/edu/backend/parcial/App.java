@@ -79,13 +79,18 @@ public class App {
 
          */
 
+        /*
         List<Liquidaciones> l = liquidacionesService.getAll();
 
         for (Liquidaciones li: l) {
             System.out.println(li.toString());
         }
+        */
 
-        System.out.println(liquidacionesService.obtenerYMostrar());
+
+        LiquidacionDTO l = liquidacionesService.obtenerYMostrar();
+
+        System.out.println(l.toString());
 
     }
 

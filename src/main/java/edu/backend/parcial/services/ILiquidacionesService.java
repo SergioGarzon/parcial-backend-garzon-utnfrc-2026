@@ -1,6 +1,7 @@
 package edu.backend.parcial.services;
 
 import edu.backend.parcial.models.Liquidaciones;
+import edu.backend.parcial.dto.LiquidacionDTO;
 
 import java.util.List;
 
@@ -16,5 +17,5 @@ public interface ILiquidacionesService {
 
     Liquidaciones delete(Long id);
 
-    String obtenerYMostrar();
+    LiquidacionDTO obtenerYMostrar();
 }

@@ -5,6 +5,9 @@ import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class LiquidacionesRepository extends Repository<Liquidaciones, Long> {
     
     @Override
@@ -33,25 +36,23 @@ public class LiquidacionesRepository extends Repository<Liquidaciones, Long> {
 
     public Liquidaciones getLiquidacion(String numeroTarjeta, Integer anio, Integer mes) {
 
-        /*Aqui esta el problema por el cual no me traia bien la informacion*/
         EntityManager manager = getManager();
 
         try {
-
-            Liquidaciones liquidaciones = new Liquidaciones();
-
-            liquidaciones = manager.createQuery("""
-                    FROM Liquidaciones""", Liquidaciones.class)
-
-                    //  l.tarjeta.numero = :numero AND
-                    //.setParameter("numero", numeroTarjeta)
-                    //.setParameter("anio", anio)
-                    //.setParameter("mes", mes)
+            // HQL con alias 'l' y condiciones WHERE obligatorias
+            return manager.createQuery("""
+                FROM Liquidaciones l 
+                WHERE l.tarjeta.numero = :numero 
+                  AND l.anio = :anio 
+                  AND l.mes = :mes
+                """, Liquidaciones.class)
+                    .setParameter("numero", numeroTarjeta)
+                    .setParameter("anio", anio)
+                    .setParameter("mes", mes)
                     .getSingleResult();
 
-            return liquidaciones;
-
-        } finally {
+        }
+        finally {
             manager.close();
         }
     }

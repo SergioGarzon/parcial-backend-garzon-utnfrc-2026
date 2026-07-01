@@ -5,6 +5,9 @@ import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class ConsumosRepository extends Repository<Consumos, Long> {
 
     @Override

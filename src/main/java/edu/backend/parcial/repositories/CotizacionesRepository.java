@@ -5,6 +5,9 @@ import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class CotizacionesRepository extends Repository<Cotizaciones, String> {
     @Override
     public Cotizaciones getById(String moneda) {

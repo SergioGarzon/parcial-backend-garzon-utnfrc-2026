@@ -8,6 +8,8 @@
 
         <class>edu.backend.parcial.models.Tarjetas</class>
         <class>edu.backend.parcial.models.Cotizaciones</class>
+        <class>edu.backend.parcial.models.Consumos</class>
+        <class>edu.backend.parcial.models.Liquidaciones</class>
 
         <properties>
 

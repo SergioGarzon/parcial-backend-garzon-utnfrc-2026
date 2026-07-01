@@ -1,7 +1,7 @@
 package edu.backend.parcial.services;
 
+import edu.backend.parcial.dto.LiquidacionDTO;
 import edu.backend.parcial.models.Liquidaciones;
-import edu.backend.parcial.models.Tarjetas;
 import edu.backend.parcial.repositories.LiquidacionesRepository;
 
 import java.util.List;
@@ -40,8 +40,32 @@ public class LiquidacionesServiceImpl implements ILiquidacionesService {
     }
 
     @Override
-    public String obtenerYMostrar() {
-        Liquidaciones liq = liquidacionesRepository.getLiquidacion("999999", 2026, 5);
-        return liq.toString();
+    public LiquidacionDTO obtenerYMostrar() {
+        Liquidaciones liq = liquidacionesRepository.getLiquidacion("4500123412340001", 2026, 5);
+
+        LiquidacionDTO liquidacionDTO = new LiquidacionDTO();
+
+        /*
+        * private Long id;
+            private String numeroTarjeta;
+            private String titular;
+            private int mes;
+            private int anio;
+            private double totalAPagar;
+            private double totalConsumos;
+            private double totalImpuestos;
+            private double totalDescuentos;*/
+
+        liquidacionDTO.setId(liq.getId());
+        liquidacionDTO.setNumeroTarjeta(liq.getTarjeta().getNumero());
+        liquidacionDTO.setTitular(liq.getTarjeta().getTitular());
+        liquidacionDTO.setMes(liq.getMes());
+        liquidacionDTO.setAnio(liq.getAnio());
+        liquidacionDTO.setTotalAPagar(liq.getTotalAPagar());
+        liquidacionDTO.setTotalConsumos(liq.getTotalConsumos());
+        liquidacionDTO.setTotalImpuestos(liq.getTotalImpuestos());
+        liquidacionDTO.setTotalDescuentos(liq.getTotalDescuentos());
+
+        return liquidacionDTO;
     }
 }

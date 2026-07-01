@@ -1,4 +1,4 @@
-package edu.backend.parcial.services;
+package edu.backend.parcial.servicetest;
 
 import edu.backend.parcial.dto.LiquidacionDTO;
 import edu.backend.parcial.excepciones.TarjetaInexistenteException;

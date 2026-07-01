@@ -5,6 +5,9 @@ import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
+import lombok.NoArgsConstructor;
+
+@NoArgsConstructor
 public class TarjetasRepository extends Repository<Tarjetas, Long> {
 
     @Override
@@ -33,24 +36,24 @@ public class TarjetasRepository extends Repository<Tarjetas, Long> {
 
     public List<Tarjetas> getTarjetasSinLiquidacion(Integer anio, Integer mes) {
 
-    EntityManager manager = getManager();
+        EntityManager manager = getManager();
 
-    try {
+        try {
 
-        return manager.createQuery("""
-                FROM Tarjetas t
-                WHERE t.id NOT IN (
-                    SELECT l.tarjeta.id
-                    FROM Liquidaciones l
-                    WHERE l.anio = :anio
-                    AND l.mes = :mes
-                )
-                """, Tarjetas.class)
-                .setParameter("anio", anio)
-                .setParameter("mes", mes)
-                .getResultList();
-    } finally {
-        manager.close();
+            return manager.createQuery("""
+                    FROM Tarjetas t
+                    WHERE t.id NOT IN (
+                        SELECT l.tarjeta.id
+                        FROM Liquidaciones l
+                        WHERE l.anio = :anio
+                        AND l.mes = :mes
+                    )
+                    """, Tarjetas.class)
+                    .setParameter("anio", anio)
+                    .setParameter("mes", mes)
+                    .getResultList();
+        } finally {
+            manager.close();
+        }
     }
-}
 }
