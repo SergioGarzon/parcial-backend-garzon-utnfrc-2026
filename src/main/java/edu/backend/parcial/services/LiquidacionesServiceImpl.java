@@ -27,8 +27,13 @@ public class LiquidacionesServiceImpl implements ILiquidacionesService {
     }
 
     @Override
-    public Liquidacion getLiquidacion(String numeroTarjeta, Integer anio, Integer mes) throws TarjetaInexistenteException  {
+    public Liquidacion getLiquidacion(Long numeroTarjeta, Integer anio, Integer mes) throws TarjetaInexistenteException  {
         return liquidacionesRepository.getLiquidacion(numeroTarjeta, anio, mes);
+    }
+
+    @Override
+    public Liquidacion getLiquidacionTarjeta(String numeroTarjeta, Integer anio, Integer mes) throws TarjetaInexistenteException  {
+        return liquidacionesRepository.getLiquidacionTarjeta(numeroTarjeta, anio, mes);
     }
 
     @Override

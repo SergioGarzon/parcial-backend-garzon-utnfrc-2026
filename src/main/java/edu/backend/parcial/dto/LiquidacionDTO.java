@@ -90,15 +90,15 @@ public class LiquidacionDTO {
     @Override
     public String toString() {
         return "LiquidacionDTO{" +
-                "id=" + id +
-                ", numeroTarjeta='" + numeroTarjeta + '\'' +
-                ", titular='" + titular + '\'' +
-                ", mes=" + mes +
-                ", anio=" + anio +
-                ", totalAPagar=" + totalAPagar +
-                ", totalConsumos=" + totalConsumos +
-                ", totalImpuestos=" + totalImpuestos +
-                ", totalDescuentos=" + totalDescuentos +
+                "\nid=" + id +
+                ", \nnumeroTarjeta='" + numeroTarjeta + '\'' +
+                ", \ntitular='" + titular + '\'' +
+                ", \nmes=" + mes +
+                ", \nanio=" + anio +
+                ", \ntotalAPagar=" + totalAPagar +
+                ", \ntotalConsumos=" + totalConsumos +
+                ", \ntotalImpuestos=" + totalImpuestos +
+                ", \ntotalDescuentos=" + totalDescuentos +
                 '}';
     }
 }

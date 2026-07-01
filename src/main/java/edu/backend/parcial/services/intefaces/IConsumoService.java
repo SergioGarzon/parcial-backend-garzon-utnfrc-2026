@@ -14,6 +14,8 @@ public interface IConsumoService {
 
     boolean deleteConsumo(Long id);
 
-    List<Consumo> getConsumosByTarjetaAnioMes(Long idTarjeta, Integer anio, Integer mes);
+    List<Consumo> getConsumosByTarjetaAnioMes(String numeroTarjeta, Integer anio, Integer mes);
+
+    List<Consumo> getConsumoTarjeta(Integer anio, Integer mes);
 
 }

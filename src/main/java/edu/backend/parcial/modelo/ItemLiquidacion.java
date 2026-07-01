@@ -1,4 +1,4 @@
-package edu.backend.parcial.modelos;
+package edu.backend.parcial.modelo;
 
 public class ItemLiquidacion {
 

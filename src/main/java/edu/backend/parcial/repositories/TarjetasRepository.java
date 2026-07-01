@@ -92,4 +92,15 @@ public class TarjetasRepository {
         return control;
     }
 
+    public List<Tarjeta> getTarjetasSinLiquidacion(Integer mes, Integer anio) {
+        return manager.createQuery(
+                "SELECT t FROM Tarjeta t WHERE t NOT IN (" +
+                        "  SELECT l.tarjeta FROM Liquidacion l WHERE l.mes = :mes AND l.anio = :anio" +
+                        ")", Tarjeta.class)
+                    .setParameter("mes", mes)
+                    .setParameter("anio", anio)
+                    .getResultList();
+    }
+
+
 }

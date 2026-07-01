@@ -17,4 +17,6 @@ public interface ITarjetaService<Tarjeta, Long> {
     boolean removeTarjetaId(Long id);
 
     boolean removeTarjetaNumero(String numero);
+
+    List<Tarjeta> getTarjetasSinLiquidacion(Integer anio, Integer mes);
 }

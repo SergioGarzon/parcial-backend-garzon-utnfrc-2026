@@ -36,8 +36,13 @@ public class ConsumosServiceImpl implements IConsumoService {
     }
 
     @Override
-    public List<Consumo> getConsumosByTarjetaAnioMes(Long idTarjeta, Integer anio, Integer mes) {
-        return consumosRepository.getConsumosByTarjetaAnioMes(idTarjeta, anio, mes);
+    public List<Consumo> getConsumosByTarjetaAnioMes(String numeroTarjeta, Integer anio, Integer mes) {
+        return consumosRepository.getConsumosByTarjetaAnioMes(numeroTarjeta, anio, mes);
+    }
+
+    @Override
+    public List<Consumo> getConsumoTarjeta(Integer anio, Integer mes) {
+        return consumosRepository.getConsumoTarjeta(anio, mes);
     }
 
 

@@ -10,10 +10,14 @@ public interface ILiquidacionesService {
 
     List<Liquidacion> getAllLiquidaciones();
 
-    Liquidacion getLiquidacion(String numeroTarjeta, Integer anio, Integer mes);
+    Liquidacion getLiquidacion(Long numeroTarjeta, Integer anio, Integer mes);
+
+    Liquidacion getLiquidacionTarjeta(String numeroTarjeta, Integer anio, Integer mes);
 
     boolean AddLiquidacion(Liquidacion liquidacion);
 
     boolean deleteLiquidacion(Long id);
+
+
 
 }

@@ -45,6 +45,10 @@ public class TarjetasServicesImpl implements ITarjetaService<Tarjeta, Long> {
         return tarjetasRepository.deleteTarjetaPorNumero(numero);
     }
 
+    @Override
+    public List<Tarjeta> getTarjetasSinLiquidacion(Integer anio, Integer mes) {
+        return tarjetasRepository.getTarjetasSinLiquidacion(mes, anio);
+    }
 }
     
 

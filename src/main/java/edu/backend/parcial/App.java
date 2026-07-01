@@ -1,8 +1,14 @@
 package edu.backend.parcial;
 
 import java.sql.SQLException;
+import java.util.LinkedList;
+import java.util.List;
 
+import edu.backend.parcial.dto.LiquidacionDTO;
+import edu.backend.parcial.models.Consumo;
+import edu.backend.parcial.models.Liquidacion;
 import edu.backend.parcial.services.ConsumosServiceImpl;
+import edu.backend.parcial.services.LiquidacionesServiceImpl;
 import edu.backend.parcial.services.TarjetasServicesImpl;
 import edu.backend.parcial.models.Tarjeta;
 
@@ -25,7 +31,9 @@ public class App {
 
         TarjetasServicesImpl tarjetasServices = new TarjetasServicesImpl(em);
         ConsumosServiceImpl consumosService = new ConsumosServiceImpl(em);
+        LiquidacionesServiceImpl liquidacionesService = new LiquidacionesServiceImpl(em);
 
+        /*
         for (Tarjeta t: tarjetasServices.getAll()) {
             System.out.println(t.toString());
         }
@@ -45,7 +53,40 @@ public class App {
         System.out.println((tarjetasServices.addTarjeta(tarjeta)) ? "AGREGADA" : "NO AGREGADA");
 
         System.out.println("\n\nBuscamos Consumo de Tarjeta");
-        
+        List<Consumo> listaConsumos = consumosService.getConsumosByTarjetaAnioMes("5555", 2026, 5);
+
+        listaConsumos.stream().forEach(System.out::println);
+
+        */
+
+
+        Liquidacion liquidacion = liquidacionesService.getLiquidacion(1L, 2026, 5);
+
+        LiquidacionDTO liquidacionDTO = new LiquidacionDTO();
+        liquidacionDTO.setId(liquidacion.getId());
+        liquidacionDTO.setNumeroTarjeta(liquidacion.getTarjeta().getNumero());
+        liquidacionDTO.setTitular(liquidacion.getTarjeta().getTitular());
+        liquidacionDTO.setMes(liquidacion.getMes());
+        liquidacionDTO.setAnio(liquidacion.getAnio());
+        liquidacionDTO.setTotalAPagar(liquidacion.getTotalAPagar() - liquidacion.getTotalDescuentos() + liquidacion.getTotalImpuestos());
+        liquidacionDTO.setTotalConsumos(liquidacion.getTotalConsumos());
+        liquidacionDTO.setTotalImpuestos(liquidacion.getTotalImpuestos());
+        liquidacionDTO.setTotalDescuentos(liquidacion.getTotalDescuentos());
+
+        System.out.println(liquidacionDTO.toString());
+
+        List<Tarjeta> tarjetas = tarjetasServices.getTarjetasSinLiquidacion(2026, 5);
+        List<String> listaNumerosTarjetas = new LinkedList<>();
+
+        for (Tarjeta t: tarjetas) {
+            listaNumerosTarjetas.add(t.getNumero());
+        }
+
+        for (int i = 0; i < listaNumerosTarjetas.size() ; i++) {
+            System.out.println(listaNumerosTarjetas.get(i));
+        }
+
+
 
         if (em != null && em.isOpen()) {
             em.close();
@@ -53,6 +94,8 @@ public class App {
         if (emf != null && emf.isOpen()) {
             emf.close();
         }
+
+        return;
 
     }
 }

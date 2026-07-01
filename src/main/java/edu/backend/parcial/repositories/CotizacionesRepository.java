@@ -1,7 +1,6 @@
 package edu.backend.parcial.repositories;
 
 import edu.backend.parcial.models.Cotizacion;
-import edu.backend.parcial.models.Tarjeta;
 import jakarta.persistence.EntityManager;
 import jakarta.persistence.NoResultException;
 import lombok.NoArgsConstructor;

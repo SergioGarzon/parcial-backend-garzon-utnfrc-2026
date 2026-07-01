@@ -2,6 +2,7 @@ package edu.backend.parcial.repositories;
 
 import edu.backend.parcial.models.Liquidacion;
 import edu.backend.parcial.excepciones.TarjetaInexistenteException;
+import edu.backend.parcial.models.Tarjeta;
 import jakarta.persistence.EntityManager;
 import lombok.NoArgsConstructor;
 
@@ -62,11 +63,11 @@ public class LiquidacionesRepository {
         return control;
     }
 
-    public Liquidacion getLiquidacion(String numeroTarjeta, Integer anio, Integer mes) throws TarjetaInexistenteException {
+    public Liquidacion getLiquidacionTarjeta(String numeroTarjeta, Integer anio, Integer mes) throws TarjetaInexistenteException {
 
         try {
             Long cantidadTarjetas = manager.createQuery(
-                            "SELECT COUNT(t) FROM Tarjetas t WHERE t.numero = :numero", Long.class)
+                            "SELECT COUNT(t) FROM Tarjeta t WHERE t.numero = :numero", Long.class)
                     .setParameter("numero", numeroTarjeta)
                     .getSingleResult();
 
@@ -75,7 +76,7 @@ public class LiquidacionesRepository {
             }
 
             return manager.createQuery("""
-                FROM Liquidaciones l 
+                FROM Liquidacion l 
                 WHERE l.tarjeta.numero = :numero 
                   AND l.anio = :anio 
                   AND l.mes = :mes
@@ -89,5 +90,34 @@ public class LiquidacionesRepository {
             return null;
         }
     }
+
+    public Liquidacion getLiquidacion(Long idTarjeta, Integer anio, Integer mes) throws TarjetaInexistenteException {
+
+        try {
+            Long cantidadTarjetas = manager.createQuery(
+                            "SELECT COUNT(t) FROM Tarjeta t WHERE t.id = :id", Long.class)
+                    .setParameter("id", idTarjeta)
+                    .getSingleResult();
+
+            if (cantidadTarjetas == 0) {
+                throw new edu.backend.parcial.excepciones.TarjetaInexistenteException(idTarjeta);
+            }
+
+            return manager.createQuery("""
+                FROM Liquidacion l 
+                WHERE l.tarjeta.id = :id 
+                  AND l.anio = :anio 
+                  AND l.mes = :mes
+                """, Liquidacion.class)
+                    .setParameter("id", idTarjeta)
+                    .setParameter("anio", anio)
+                    .setParameter("mes", mes)
+                    .getSingleResult();
+
+        } catch (jakarta.persistence.NoResultException e) {
+            return null;
+        }
+    }
+
 
 }
