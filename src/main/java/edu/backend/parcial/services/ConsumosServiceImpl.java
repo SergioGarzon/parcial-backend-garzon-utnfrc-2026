@@ -1,8 +1,11 @@
 package edu.backend.parcial.services;
 
+import edu.backend.parcial.models.Consumo;
 import edu.backend.parcial.repositories.ConsumosRepository;
 import edu.backend.parcial.services.intefaces.IConsumoService;
 import jakarta.persistence.EntityManager;
+
+import java.util.List;
 
 public class ConsumosServiceImpl implements IConsumoService {
 
@@ -12,32 +15,31 @@ public class ConsumosServiceImpl implements IConsumoService {
         consumosRepository = new ConsumosRepository(em);
     }
 
-    /*
     @Override
-    public List<Consumos> getAll() {
+    public List<Consumo> getAll() {
         return consumosRepository.getAll();
     }
-    
+
     @Override
-    public Consumos getById(Long id) {
+    public Consumo getById(Long id) {
         return consumosRepository.getById(id);
     }
 
     @Override
-    public void add(Consumos entity) {
-        consumosRepository.add(entity);
+    public boolean AddConsumo(Consumo consumo) {
+        return consumosRepository.AddConsumo(consumo);
     }
 
     @Override
-    public void update(Consumos entity) {
-        consumosRepository.update(entity);
+    public boolean deleteConsumo(Long id) {
+        return consumosRepository.deleteConsumo(id);
     }
 
     @Override
-    public Consumos delete(Long id) {
-        return consumosRepository.delete(id);
+    public List<Consumo> getConsumosByTarjetaAnioMes(Long idTarjeta, Integer anio, Integer mes) {
+        return consumosRepository.getConsumosByTarjetaAnioMes(idTarjeta, anio, mes);
     }
 
-     */
+
 
 }

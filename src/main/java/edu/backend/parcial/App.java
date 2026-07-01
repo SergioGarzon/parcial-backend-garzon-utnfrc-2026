@@ -2,6 +2,7 @@ package edu.backend.parcial;
 
 import java.sql.SQLException;
 
+import edu.backend.parcial.services.ConsumosServiceImpl;
 import edu.backend.parcial.services.TarjetasServicesImpl;
 import edu.backend.parcial.models.Tarjeta;
 
@@ -23,6 +24,7 @@ public class App {
         EntityManager em = emf.createEntityManager();
 
         TarjetasServicesImpl tarjetasServices = new TarjetasServicesImpl(em);
+        ConsumosServiceImpl consumosService = new ConsumosServiceImpl(em);
 
         for (Tarjeta t: tarjetasServices.getAll()) {
             System.out.println(t.toString());
@@ -41,6 +43,9 @@ public class App {
         tarjeta.setLimiteCredito(545.2d);
 
         System.out.println((tarjetasServices.addTarjeta(tarjeta)) ? "AGREGADA" : "NO AGREGADA");
+
+        System.out.println("\n\nBuscamos Consumo de Tarjeta");
+        
 
         if (em != null && em.isOpen()) {
             em.close();

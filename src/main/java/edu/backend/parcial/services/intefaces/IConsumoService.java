@@ -1,17 +1,19 @@
 package edu.backend.parcial.services.intefaces;
 
+import edu.backend.parcial.models.Consumo;
+
+import java.util.List;
+
 public interface IConsumoService {
 
-    /*
-    List<Consumos> getAll();
+    List<Consumo> getAll();
 
-    Consumos getById(Long id);
+    Consumo getById(Long id);
 
-    void add(Consumos entity);
+    boolean AddConsumo(Consumo consumo);
 
-    void update(Consumos entity);
+    boolean deleteConsumo(Long id);
 
-    Consumos delete(Long id);
+    List<Consumo> getConsumosByTarjetaAnioMes(Long idTarjeta, Integer anio, Integer mes);
 
-     */
 }

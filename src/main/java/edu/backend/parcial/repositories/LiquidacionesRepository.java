@@ -5,6 +5,8 @@ import edu.backend.parcial.excepciones.TarjetaInexistenteException;
 import jakarta.persistence.EntityManager;
 import lombok.NoArgsConstructor;
 
+import java.util.List;
+
 @NoArgsConstructor
 public class LiquidacionesRepository {
 
@@ -16,6 +18,48 @@ public class LiquidacionesRepository {
 
     public Liquidacion getById(Long id) {
         return manager.find(Liquidacion.class, id);
+    }
+
+    public List<Liquidacion> getAll() {
+        return manager.createQuery("FROM Liquidaciones",Liquidacion.class).getResultList();
+    }
+
+    public boolean AddLiquidacion(Liquidacion liquidacion) {
+        boolean control = false;
+        try {
+            manager.getTransaction().begin();
+            manager.persist(liquidacion);
+            manager.getTransaction().commit();
+            control = true;
+
+        } catch (Exception e) {
+            if (manager.getTransaction().isActive())
+                manager.getTransaction().rollback();
+            throw e;
+        }
+        return control;
+    }
+
+
+    public boolean deleteLiquidacion(Long id) {
+        boolean control = false;
+
+        try {
+            manager.getTransaction().begin();
+            Liquidacion entity = getById(id);
+            if (entity != null) {
+                Liquidacion managedEntity = manager.merge(entity);
+                manager.remove(managedEntity);
+            }
+            manager.getTransaction().commit();
+            control = true;
+        } catch (Exception e) {
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+            throw e;
+        }
+        return control;
     }
 
     public Liquidacion getLiquidacion(String numeroTarjeta, Integer anio, Integer mes) throws TarjetaInexistenteException {
@@ -45,6 +89,5 @@ public class LiquidacionesRepository {
             return null;
         }
     }
-
 
 }

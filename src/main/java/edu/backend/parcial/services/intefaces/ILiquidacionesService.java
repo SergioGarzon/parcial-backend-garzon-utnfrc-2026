@@ -1,19 +1,19 @@
 package edu.backend.parcial.services.intefaces;
 
+import edu.backend.parcial.models.Liquidacion;
+
+import java.util.List;
+
 public interface ILiquidacionesService {
 
-    /*
-    List<Liquidaciones> getAll();
+    Liquidacion getById(Long id);
 
-    Liquidaciones getById(Long id);
+    List<Liquidacion> getAllLiquidaciones();
 
-    void add(Liquidaciones entity);
+    Liquidacion getLiquidacion(String numeroTarjeta, Integer anio, Integer mes);
 
-    void update(Liquidaciones entity);
+    boolean AddLiquidacion(Liquidacion liquidacion);
 
-    Liquidaciones delete(Long id);
+    boolean deleteLiquidacion(Long id);
 
-    LiquidacionDTO obtenerYMostrar();
-
-     */
 }
