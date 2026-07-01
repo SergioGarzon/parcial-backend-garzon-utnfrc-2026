@@ -122,7 +122,7 @@ public class LiquidacionServiceImplTest {
     }
 
     @Test
-    void testLiquidarLote() throws IOException {
+    void teLiquidarLote() throws IOException {
         URL url = getClass().getClassLoader().getResource("liquidaciones.csv");
         assertNotNull(url, "No se encontró el archivo de lotes liquidaciones.csv");
 

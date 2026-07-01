@@ -19,7 +19,7 @@ public class CotizacionesRepository {
 
     public Cotizacion getByMoneda(String moneda) {
         try {
-            return manager.createQuery("FROM Cotizaciones t WHERE t.moneda = :moneda", Cotizacion.class)
+            return manager.createQuery("FROM Cotizacion t WHERE t.moneda = :moneda", Cotizacion.class)
                     .setParameter("moneda", moneda)
                     .getSingleResult();
         } catch (NoResultException e) {
@@ -29,7 +29,7 @@ public class CotizacionesRepository {
 
     public Cotizacion getByTasaCambio(BigDecimal tasaCambio) {
         try {
-            return manager.createQuery("FROM Cotizaciones t WHERE t.tasa_cambio = :tasaCambio", Cotizacion.class)
+            return manager.createQuery("FROM Cotizacion t WHERE t.tasa_cambio = :tasaCambio", Cotizacion.class)
                     .setParameter("tasaCambio", tasaCambio)
                     .getSingleResult();
         } catch (NoResultException e) {
@@ -38,7 +38,7 @@ public class CotizacionesRepository {
     }
 
     public List<Cotizacion> getAll() {
-        return manager.createQuery("FROM Cotizaciones",Cotizacion.class).getResultList();
+        return manager.createQuery("FROM Cotizacion",Cotizacion.class).getResultList();
     }
 
     public boolean AddCotizacion(Cotizacion cotizacion) {
