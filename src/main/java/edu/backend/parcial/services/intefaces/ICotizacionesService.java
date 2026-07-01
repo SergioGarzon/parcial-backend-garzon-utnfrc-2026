@@ -1,18 +1,17 @@
-package edu.backend.parcial.services;
+package edu.backend.parcial.services.intefaces;
+
+import edu.backend.parcial.models.Cotizacion;
+
+import java.math.BigDecimal;
+import java.util.List;
 
 public interface ICotizacionesService {
 
-    /*
-    List<Cotizaciones> getAll();
+    Cotizacion getByMoneda(String moneda);
 
-    Cotizaciones getById(String id);
+    Cotizacion getByTasaCambio(BigDecimal tasaCambio);
 
-    void add(Cotizaciones entity);
+    List<Cotizacion> getAllCotizaciones();
 
-    void update(Cotizaciones entity);
-
-    Cotizaciones delete(String id);
-
-     */
-
+    boolean AddCotizacion(Cotizacion cotizacion);
 }

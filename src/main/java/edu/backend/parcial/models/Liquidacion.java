@@ -18,7 +18,7 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Liquidaciones {
+public class Liquidacion {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -28,7 +28,7 @@ public class Liquidaciones {
     // FK -> TARJETAS(ID)
     @ManyToOne
     @JoinColumn(name = "ID_TARJETA", nullable = false)
-    private Tarjetas tarjeta;
+    private Tarjeta tarjeta;
 
     @Column(name = "MES", nullable = false)
     private Integer mes;

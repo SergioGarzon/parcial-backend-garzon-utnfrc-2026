@@ -18,7 +18,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Cotizaciones {
+public class Cotizacion {
 
     @Id
     @Column(name = "MONEDA", nullable = false, length = 3)

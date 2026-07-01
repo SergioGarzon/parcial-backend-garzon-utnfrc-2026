@@ -1,20 +1,18 @@
 package edu.backend.parcial.services;
 
-import edu.backend.parcial.models.Consumos;
-import edu.backend.parcial.models.Cotizaciones;
 import edu.backend.parcial.repositories.ConsumosRepository;
-
-import java.util.List;
+import edu.backend.parcial.services.intefaces.IConsumoService;
+import jakarta.persistence.EntityManager;
 
 public class ConsumosServiceImpl implements IConsumoService {
- 
-    
+
     private ConsumosRepository consumosRepository;
 
-    public ConsumosServiceImpl() {
-        consumosRepository = new ConsumosRepository();
+    public ConsumosServiceImpl(EntityManager em) {
+        consumosRepository = new ConsumosRepository(em);
     }
 
+    /*
     @Override
     public List<Consumos> getAll() {
         return consumosRepository.getAll();
@@ -39,5 +37,7 @@ public class ConsumosServiceImpl implements IConsumoService {
     public Consumos delete(Long id) {
         return consumosRepository.delete(id);
     }
+
+     */
 
 }

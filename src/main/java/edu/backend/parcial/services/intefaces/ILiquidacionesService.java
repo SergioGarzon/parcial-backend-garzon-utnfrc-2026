@@ -1,4 +1,4 @@
-package edu.backend.parcial.services;
+package edu.backend.parcial.services.intefaces;
 
 public interface ILiquidacionesService {
 

@@ -1,6 +1,6 @@
 package edu.backend.parcial.servicetest;
 
-import edu.backend.parcial.models.Liquidaciones;
+import edu.backend.parcial.models.Liquidacion;
 import edu.backend.parcial.repositories.*;
 import edu.backend.parcial.dto.LiquidacionDTO;
 import edu.backend.parcial.excepciones.TarjetaInexistenteException;
@@ -27,7 +27,10 @@ public class LiquidacionesServiceImplement implements LiquidacionService {
 
     public LiquidacionDTO generarLiquidacion(long idTarjeta, int anio, int mes) throws TarjetaInexistenteException {
 
-        /*
+/*
+
+
+
             private Long id;
             private Tarjetas tarjeta;
             private Integer mes;
@@ -36,11 +39,11 @@ public class LiquidacionesServiceImplement implements LiquidacionService {
             private Double totalConsumos;
             private Double totalImpuestos;
             private Double totalDescuentos;
-        */
 
-        Liquidaciones liquidaciones = this.liquidacionRepository.getLiquidacion(String.valueOf(idTarjeta), anio, mes);
 
-        /*
+        Liquidacion liquidaciones = this.liquidacionRepository.getLiquidacion(String.valueOf(idTarjeta), anio, mes);
+
+
             Long id;
             String numeroTarjeta;
             String titular;
@@ -50,7 +53,7 @@ public class LiquidacionesServiceImplement implements LiquidacionService {
             double totalConsumos;
             double totalImpuestos;
             double totalDescuentos;
-        */
+
         LiquidacionDTO liquidacionDTO = new LiquidacionDTO();
         liquidacionDTO.setId(liquidaciones.getId());
         liquidacionDTO.setNumeroTarjeta(liquidaciones.getTarjeta().getNumero());
@@ -63,6 +66,10 @@ public class LiquidacionesServiceImplement implements LiquidacionService {
         liquidacionDTO.setTotalDescuentos(liquidaciones.getTotalDescuentos());
 
         return liquidacionDTO;
+
+        */
+
+        return null;
     }
 
     public List<String> getLiquidacionesPendientes(int anio, int mes) {

@@ -20,7 +20,7 @@ import lombok.ToString;
 @NoArgsConstructor
 @AllArgsConstructor
 @ToString
-public class Consumos {
+public class Consumo {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -30,7 +30,7 @@ public class Consumos {
     // FK -> TARJETAS(ID)
     @ManyToOne
     @JoinColumn(name = "ID_TARJETA", nullable = false)
-    private Tarjetas tarjeta;
+    private Tarjeta tarjeta;
 
     @Column(name = "MONTO", nullable = false)
     private Double monto;

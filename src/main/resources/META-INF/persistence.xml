@@ -6,10 +6,10 @@
 
         <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
 
-        <class>edu.backend.parcial.models.Tarjetas</class>
-        <class>edu.backend.parcial.models.Cotizaciones</class>
-        <class>edu.backend.parcial.models.Consumos</class>
-        <class>edu.backend.parcial.models.Liquidaciones</class>
+        <class>edu.backend.parcial.models.Tarjeta</class>
+        <class>edu.backend.parcial.models.Cotizacion</class>
+        <class>edu.backend.parcial.models.Consumo</class>
+        <class>edu.backend.parcial.models.Liquidacion</class>
 
         <properties>
 

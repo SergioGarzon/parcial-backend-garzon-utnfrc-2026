@@ -1,59 +1,95 @@
 package edu.backend.parcial.repositories;
 
-import edu.backend.parcial.models.Tarjetas;
+import edu.backend.parcial.models.Tarjeta;
 import jakarta.persistence.EntityManager;
 
 import java.util.List;
 
 import lombok.NoArgsConstructor;
 
-@NoArgsConstructor
-public class TarjetasRepository extends Repository<Tarjetas, Long> {
+@NoArgsConstructor // No se usa pero por las dudas
+public class TarjetasRepository {
 
-    @Override
-    public Tarjetas getById(Long id) {
+    private EntityManager manager;
 
-        EntityManager manager = getManager();
+    public TarjetasRepository(EntityManager em) {
+        this.manager = em;
+    }
 
+    public Tarjeta getById(Long id) {
+        return manager.find(Tarjeta.class, id);
+    }
+
+    public Tarjeta getByNumero(String numero) {
         try {
-            return manager.find(Tarjetas.class, id);
-        } finally {
-            manager.close();
+            return manager.createQuery("FROM Tarjeta t WHERE t.numero = :numero", Tarjeta.class)
+                    .setParameter("numero", numero)
+                    .getSingleResult();
+        } catch (jakarta.persistence.NoResultException e) {
+            return null;
         }
     }
 
-    @Override
-    public List<Tarjetas> getAll() {
-
-        EntityManager manager = getManager();
-
-        try {
-            return manager.createQuery("FROM Tarjetas",Tarjetas.class).getResultList();
-        } finally {
-            manager.close();
-        }
+    public List<Tarjeta> getAll() {
+        return manager.createQuery("FROM Tarjeta",Tarjeta.class).getResultList();
     }
 
-    public List<Tarjetas> getTarjetasSinLiquidacion(Integer anio, Integer mes) {
+    public boolean AddTarjeta(Tarjeta tarjeta) {
+        boolean control = false;
+        try {
+            manager.getTransaction().begin();
+            manager.persist(tarjeta);
+            manager.getTransaction().commit();
+            control = true;
 
-        EntityManager manager = getManager();
+        } catch (Exception e) {
+            if (manager.getTransaction().isActive())
+                manager.getTransaction().rollback();
+            throw e;
+        }
+        return control;
+    }
+
+    public boolean deleteTarjeta(Long id) {
+        boolean control = false;
 
         try {
-
-            return manager.createQuery("""
-                    FROM Tarjetas t
-                    WHERE t.id NOT IN (
-                        SELECT l.tarjeta.id
-                        FROM Liquidaciones l
-                        WHERE l.anio = :anio
-                        AND l.mes = :mes
-                    )
-                    """, Tarjetas.class)
-                    .setParameter("anio", anio)
-                    .setParameter("mes", mes)
-                    .getResultList();
-        } finally {
-            manager.close();
+            manager.getTransaction().begin();
+            Tarjeta entity = getById(id);
+            if (entity != null) {
+                Tarjeta managedEntity = manager.merge(entity);
+                manager.remove(managedEntity);
+            }
+            manager.getTransaction().commit();
+            control = true;
+        } catch (Exception e) {
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+            throw e;
         }
+        return control;
     }
+
+    public boolean deleteTarjetaPorNumero(String numero) {
+        boolean control = false;
+
+        try {
+            manager.getTransaction().begin();
+            Tarjeta entity = getByNumero(numero);
+            if (entity != null) {
+                Tarjeta managedEntity = manager.merge(entity);
+                manager.remove(managedEntity);
+            }
+            manager.getTransaction().commit();
+            control = true;
+        } catch (Exception e) {
+            if (manager.getTransaction().isActive()) {
+                manager.getTransaction().rollback();
+            }
+            throw e;
+        }
+        return control;
+    }
+
 }

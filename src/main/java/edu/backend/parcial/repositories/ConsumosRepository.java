@@ -1,58 +1,25 @@
 package edu.backend.parcial.repositories;
 
-import edu.backend.parcial.models.Consumos;
+import edu.backend.parcial.models.Consumo;
 import jakarta.persistence.EntityManager;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
-import lombok.NoArgsConstructor;
-
 @NoArgsConstructor
-public class ConsumosRepository extends Repository<Consumos, Long> {
+public class ConsumosRepository {
 
-    @Override
-    public Consumos getById(Long id) {
+    private EntityManager manager;
 
-        EntityManager manager = getManager();
-
-        try {
-            return manager.find(Consumos.class, id);
-        } finally {
-            manager.close();
-        }
+    public ConsumosRepository(EntityManager em) {
+        this.manager = em;
     }
 
-    @Override
-    public List<Consumos> getAll() {
-
-        EntityManager manager = getManager();
-
-        try {
-            return manager.createQuery("FROM Consumos",Consumos.class).getResultList();
-        } finally {
-            manager.close();
-        }
+    public List<Consumo> getAll() {
+        return manager.createQuery("FROM Consumos",Consumo.class).getResultList();
     }
 
-    public List<Consumos> getByTarjetaAndPeriodo(Long idTarjeta, Integer anio, Integer mes) {
 
-        EntityManager manager = getManager();
 
-        try {
 
-            return manager.createQuery("""
-                    FROM Consumos c
-                    WHERE c.tarjeta.id = :idTarjeta
-                    AND c.anio = :anio
-                    AND c.mes = :mes
-                    """, Consumos.class)
-                    .setParameter("idTarjeta", idTarjeta)
-                    .setParameter("anio", anio)
-                    .setParameter("mes", mes)
-                    .getResultList();
-
-        } finally {
-            manager.close();
-        }
-    }
 }

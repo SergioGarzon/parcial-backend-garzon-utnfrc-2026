@@ -1,42 +1,50 @@
 package edu.backend.parcial.services;
 
+import edu.backend.parcial.models.Tarjeta;
+import edu.backend.parcial.repositories.TarjetasRepository;
+import edu.backend.parcial.services.intefaces.ITarjetaService;
+import jakarta.persistence.EntityManager;
+
 import java.util.List;
 
-import edu.backend.parcial.models.Tarjetas;
-import edu.backend.parcial.repositories.TarjetasRepository;
-
-public class TarjetasServicesImpl implements ITarjetaService<Tarjetas, Long> {
+public class TarjetasServicesImpl implements ITarjetaService<Tarjeta, Long> {
 
     private TarjetasRepository tarjetasRepository;
 
-    public TarjetasServicesImpl() {
-        tarjetasRepository = new TarjetasRepository();
+    public TarjetasServicesImpl(EntityManager em) {
+        tarjetasRepository = new TarjetasRepository(em);
     }
 
     @Override
-    public List<Tarjetas> getAll() {
+    public List<Tarjeta> getAll() {
         return tarjetasRepository.getAll();
     }
 
     @Override
-    public Tarjetas getById(Long id) {
+    public Tarjeta getById(Long id) {
         return tarjetasRepository.getById(id);
     }
 
     @Override
-    public void add(Tarjetas entity) {
-        tarjetasRepository.add(entity);
+    public Tarjeta getByNumero(String numero) {
+        return tarjetasRepository.getByNumero(numero);
     }
 
     @Override
-    public void update(Tarjetas entity) {
-        tarjetasRepository.update(entity);
+    public boolean addTarjeta(Tarjeta tarjeta) {
+        return tarjetasRepository.AddTarjeta(tarjeta);
     }
 
     @Override
-    public Tarjetas delete(Long id) {
-        return tarjetasRepository.delete(id);
+    public boolean removeTarjetaId(Long id) {
+        return tarjetasRepository.deleteTarjeta(id);
     }
+
+    @Override
+    public boolean removeTarjetaNumero(String numero) {
+        return tarjetasRepository.deleteTarjetaPorNumero(numero);
+    }
+
 }
     
 
